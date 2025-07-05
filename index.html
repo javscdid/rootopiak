@@ -205,16 +205,51 @@
     <div class="contact-card" onclick="copyText('https://wa.me/639097571277')">Whatsapp Calvyn<br><small>Klik untuk copy</small></div>
     <div class="contact-card" onclick="copyText('https://wa.me/6289608833355')">Whatsapp Zyx<br><small>Klik untuk copy</small></div>
   </div>
-  <form action="https://formsubmit.co/metaprivateserver@gmail.com" method="POST">
-    <label for="name">Nama Anda</label>
-    <input type="text" id="name" name="name" placeholder="Nama Anda" required />
-    <label for="email">Email Anda</label>
-    <input type="email" id="email" name="email" placeholder="Email Anda" required />
-    <label for="message">Pesan Anda</label>
-    <textarea id="message" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
-    <input type="submit" value="Kirim Pesan" />
-  </form>
+<form id="discordForm">
+  <label for="name">Nama Anda:</label>
+  <input type="text" id="name" name="name" required><br><br>
+  <label for="email">Email Anda:</label>
+  <input type="email" id="email" name="email" required><br><br>
+  <label for="message">Pesan Anda:</label>
+  <textarea id="message" name="message" rows="4" required></textarea><br><br>
+  <input type="button" value="Kirim Pesan" onclick="sendToDiscord()" />
+</form>
 </div>
+
+<script>
+  async function sendToDiscord() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    const payload = {
+      embeds: [{
+        title: '📩 Pesan dari RooTopia Website',
+        fields: [
+          { name: 'Nama', value: name },
+          { name: 'Email', value: email },
+          { name: 'Pesan', value: message }
+        ]
+      }]
+    };
+
+    const webhookUrl = 'https://discord.com/api/webhooks/1391078907049934868/CpMk1rorqWW96kBq-EIj3FbvX3cbh7BvkffUr2E-f9zC3CkoVpmf4GmiaX4ZEq8DQWic'; // Ganti dengan URL webhook kamu
+
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      alert('Pesan berhasil dikirim ke Discord!');
+      document.getElementById('discordForm').reset();
+    } else {
+      alert('Error: gagal kirim. Coba lagi nanti.');
+    }
+  }
+</script>
+
 
 <footer>
   <p>&copy; 2025 RooTopia. All rights reserved.</p>

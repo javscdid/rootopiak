@@ -217,38 +217,56 @@
 </div>
 
 <script>
-  async function sendToDiscord() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+async function sendToDiscord() {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
 
-    const payload = {
-      embeds: [{
-        title: '📩 Pesan dari RooTopia Website',
-        fields: [
-          { name: 'Nama', value: name },
-          { name: 'Email', value: email },
-          { name: 'Pesan', value: message }
-        ]
-      }]
-    };
+  const payload = {
+    username: 'RooTopia Bot',
+    avatar_url: 'https://media.discordapp.net/attachments/1375068909912457229/1390331790127792269/20250703_180209.png?ex=686a81e1&is=68693061&hm=493db91671dcf3cda3c6c9cc5b30b55c54393c9c27df6fdba16b8ed34b38e8d0&=&format=webp&quality=lossless&width=770&height=770',
+    embeds: [{
+      author: {
+        name: 'RooTopia Contact',
+        icon_url: 'https://media.discordapp.net/attachments/1375068909912457229/1390331790127792269/20250703_180209.png?ex=686a81e1&is=68693061&hm=493db91671dcf3cda3c6c9cc5b30b55c54393c9c27df6fdba16b8ed34b38e8d0&=&format=webp&quality=lossless&width=770&height=770'
+      },
+      title: '<:snsjs:1334507034942640192> New message from Website',
+      description: `**<:dsjd:1334506607203323967> Detail Information:**`,
+      color: 0x00CCFF,
+      fields: [
+        { name: 'Nama', value: name, inline: true },
+        { name: 'Email', value: email, inline: true },
+        { name: 'Pesan', value: message }
+      ],
+      thumbnail: {
+        url: 'https://media.discordapp.net/attachments/1391078849088851968/1391080952247226549/20250705_223848.png?ex=686a9898&is=68694718&hm=a3b85ae13254c1ac12fc60b81794a0ddec4ef21e63ba5e07eeb2aab28178a429&=&format=webp&quality=lossless&width=1848&height=459'
+      },
+      image: {
+        url: 'https://media.discordapp.net/attachments/1391078849088851968/1391080952247226549/20250705_223848.png?ex=686a9898&is=68694718&hm=a3b85ae13254c1ac12fc60b81794a0ddec4ef21e63ba5e07eeb2aab28178a429&=&format=webp&quality=lossless&width=1848&height=459'
+      },
+      footer: {
+        text: 'RooTopia Private Server',
+        icon_url: 'https://media.discordapp.net/attachments/1375068909912457229/1390331790127792269/20250703_180209.png?ex=686a81e1&is=68693061&hm=493db91671dcf3cda3c6c9cc5b30b55c54393c9c27df6fdba16b8ed34b38e8d0&=&format=webp&quality=lossless&width=770&height=770'
+      },
+      timestamp: new Date().toISOString()
+    }]
+  };
 
-    const webhookUrl = 'https://discord.com/api/webhooks/1391078907049934868/CpMk1rorqWW96kBq-EIj3FbvX3cbh7BvkffUr2E-f9zC3CkoVpmf4GmiaX4ZEq8DQWic'; // Ganti dengan URL webhook kamu
+  const res = await fetch('https://discord.com/api/webhooks/1391078907049934868/CpMk1rorqWW96kBq-EIj3FbvX3cbh7BvkffUr2E-f9zC3CkoVpmf4GmiaX4ZEq8DQWic', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
 
-    const res = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    if (res.ok) {
-      alert('Pesan berhasil dikirim ke Discord!');
-      document.getElementById('discordForm').reset();
-    } else {
-      alert('Error: gagal kirim. Coba lagi nanti.');
-    }
+  if (res.ok) {
+    alert('Pesan terkirim! Tunggu balasan di email kamu ya.');
+    document.getElementById('discordForm').reset();
+  } else {
+    alert('Gagal kirim pesan — coba lagi.');
   }
+}
 </script>
+
 
 
 <footer>

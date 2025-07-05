@@ -206,10 +206,12 @@
     <div class="contact-card" onclick="copyText('https://wa.me/6289608833355')">Whatsapp Zyx<br><small>Klik untuk copy</small></div>
   </div>
 <form id="discordForm">
-  <label for="name">Nama Anda:</label>
-  <input type="text" id="name" name="name" required><br><br>
+  <label for="growid">GrowID Anda:</label>
+  <input type="text" id="growid" name="growid" required><br><br>
   <label for="email">Email Anda:</label>
   <input type="email" id="email" name="email" required><br><br>
+  <label for="whatsapp">WhatsApp Anda:</label>
+  <input type="whatsapp" id="whatsapp" name="whatsapp" required><br><br>
   <label for="message">Pesan Anda:</label>
   <textarea id="message" name="message" rows="4" required></textarea><br><br>
   <input type="button" value="Kirim Pesan" onclick="sendToDiscord()" />
@@ -218,8 +220,9 @@
 
 <script>
 async function sendToDiscord() {
-  const name = document.getElementById('name').value;
+  const name = document.getElementById('growid').value;
   const email = document.getElementById('email').value;
+  const whatsapp = document.getElementById('whatsapp').value;
   const message = document.getElementById('message').value;
 
   const payload = {
@@ -230,13 +233,14 @@ async function sendToDiscord() {
         name: 'RooTopia Contact',
         icon_url: 'https://media.discordapp.net/attachments/1375068909912457229/1390331790127792269/20250703_180209.png?ex=686a81e1&is=68693061&hm=493db91671dcf3cda3c6c9cc5b30b55c54393c9c27df6fdba16b8ed34b38e8d0&=&format=webp&quality=lossless&width=770&height=770'
       },
-      title: '<:snsjs:1334507034942640192> New message from Website',
-      description: `**<:dsjd:1334506607203323967> Detail Information:**`,
+      title: '<:dsjd:1334506607203323967> New message from Website',
+      description: `**<:dsjd:1334506607203323967><:snsjs:1334507034942640192> Detail Information:**`,
       color: 0x00CCFF,
       fields: [
-        { name: 'Nama', value: name, inline: true },
+        { name: 'GrowID', value: name, inline: true },
         { name: 'Email', value: email, inline: true },
-        { name: 'Pesan', value: message }
+        { name: 'WhatsApp', value: whatsapp, inline: true },
+        { name: 'Message', value: message }
       ],
       thumbnail: {
         url: 'https://media.discordapp.net/attachments/1391078849088851968/1391080952247226549/20250705_223848.png?ex=686a9898&is=68694718&hm=a3b85ae13254c1ac12fc60b81794a0ddec4ef21e63ba5e07eeb2aab28178a429&=&format=webp&quality=lossless&width=1848&height=459'
